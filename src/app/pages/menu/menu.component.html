@@ -1,0 +1,54 @@
+<section class="home">
+    <div class="tittle-block">
+      <div class="logo">
+        <a href="">
+          <img src="assets/icon/restaurant_Unemi.png" alt="logo" />
+        </a>
+      </div>
+      <h1>Menu</h1>
+    </div>
+</section> 
+
+<section class="menu menu2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-header wow fadeInDown">
+            <h1>
+             Platos
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="food-menu wow fadeInUp">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="menu-tags2">
+                <span (click)="currentState = 'All'" [class.tagsort2-active]="currentState === 'All'">All</span>
+                <span (click)="currentState = 'Desayuno'" [class.tagsort2-active]="currentState === 'Desayuno'">Desayuno</span>
+                <span (click)="currentState = 'Almuerzo'" [class.tagsort2-active]="currentState === 'Almuerzo'">Almuerzo</span>
+                <span (click)="currentState = 'Merienda'" [class.tagsort2-active]="currentState === 'Merienda'">Merienda</span>
+              </div>
+          </div>
+        </div>
+        <div class="row menu-items2">
+            <div *ngFor="let lista of filterMenuItems()" class="menu-item2 col-sm-4 col-xs-12 starter dinner desserts">
+            <div class="menu-info">
+              <img src="{{lista.foto}}" class="img-responsive" alt />
+              <a   >
+                <div class="menu2-overlay">
+                  <h4>{{lista.plato}}</h4>
+                  <p>
+                    {{lista.descripcion}}
+                  </p>
+                  <span class="price">$ {{lista.precio}}</span>
+                  <h4>{{lista.estado}}</h4>
+                </div>
+              </a>
+            </div>
+            <button  (click)="addToCart(lista)" class="menu-more">+</button>
+          </div>        
+        </div>
+      </div>
+    </div>
+  </section>

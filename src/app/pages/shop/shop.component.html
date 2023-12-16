@@ -1,0 +1,94 @@
+<section class="page_header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="text-uppercase">Cart</h2>
+          <p>Revisa tus Pedidos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <table class="cart-table table table-bordered">
+            <thead>
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>Plato</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody> 
+              <tr *ngFor="let item of cartItems$ | async">
+                <td>
+                  <a (click)="removeItemFromCart(item.id_menu)"><i class="fa fa-times"></i
+                  ></a>
+                </td>
+                <td>
+                  <a
+                    ><img
+                    src="{{item.foto}}"
+                      alt=""
+                      height="90"
+                      width="90"
+                  /></a>
+                </td>
+                <td>
+                  <a > {{ item.plato }}</a>
+                </td>
+                <td>
+                  <span class="amount">{{ item.precio_unitario}}</span>
+                </td>
+                <td>
+                  <div class="quantity">{{ item.cantidad}}</div>
+                </td>
+                <td>
+                  <span class="amount">{{ item.precio_unitario * item.cantidad}}</span>
+                </td>
+              </tr>
+          
+              <tr>
+                <td colspan="6" class="actions">
+                  <div class="col-md-6"> 
+                  </div>
+                  <div class="col-md-6">
+                    <div class="cart-btn">
+                      <button class="btn btn-default" type="submit">
+                        Actualizar Carrito
+                      </button>
+                      <button
+                        class="btn btn-success"
+                        type="submit"
+                      >
+                        RESERVAR
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="cart_totals">
+            <div class="col-md-6 push-md-6 no-padding">
+              <h4 class="text-left">Total</h4>
+              <br />
+              <table class="table table-bordered col-md-6">
+                <tbody>
+                  <tr>
+                    <th>Carrito Total</th>
+                    <td><span class="amount">$ {{ cartService.getTotalItems() }}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

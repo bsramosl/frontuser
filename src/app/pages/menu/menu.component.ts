@@ -1,0 +1,60 @@
+import { Component } from '@angular/core';
+import { MenuService } from 'app/services/menu/menu.service';
+import { Menu } from '../../models/menu';
+import { CartItem } from '@app/models/cart';
+import { CartService } from 'app/services/cart/cart.service'
+
+@Component({
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
+})
+export class MenuComponent {
+    
+  list: Menu[] = [];
+  loading: boolean = false;
+  currentState = 'All'; 
+
+  constructor(private menuService: MenuService,private cartService: CartService) { }
+   
+  ngOnInit(): void {
+    this.getList();   
+  }
+
+  getList(){
+    this.loading = true;
+    this.menuService.getList().subscribe((data: Menu[])=>{
+      this.list = data;
+      this.loading = false;
+    })
+  }  
+
+  filterMenuItems() {
+    if (this.currentState === 'All') {
+      return this.list; // Display all items
+    } else {
+      return this.list.filter(item => item.nombre_menu === this.currentState);
+    }
+  } 
+
+  addToCart(menu: Menu) {
+    // Convierte el objeto Menu a un objeto CartItem antes de agregarlo al carrito
+    const cartItem: CartItem = {
+      id_menu: menu.id_menu,
+      id_bar: menu.id_bar,
+      nombre_menu: menu.nombre_menu,
+      plato: menu.plato,
+      descripcion: menu.descripcion,
+      precio: menu.precio,
+      estado: menu.estado,
+      foto: menu.foto,
+      cantidad: 1, // Cantidad inicial, puedes ajustar esto según tus necesidades
+      id_detalle_reserva: 0, // Ajusta según tus necesidades
+      id_reserva: 0, // Ajusta según tus necesidades
+      precio_unitario: menu.precio, // Ajusta según tus necesidades
+      subtotal: menu.precio // Ajusta según tus necesidades
+    };
+
+    this.cartService.addToCart(cartItem);
+  }
+}
