@@ -38,7 +38,6 @@ export class BarComponent {
       (data: Menu | Menu[]) => { // Allow for a single item or an array
         this.list = Array.isArray(data) ? data : [data];
         this.loading = false;     
-        console.log(data)   
       },
       (error) => {
         console.error('Error fetching data:', error);

@@ -41,6 +41,12 @@ export class CartService {
     this.updateCart();
   }
 
+  clearCart() {
+    this.cartItems = [];
+    this.cartSubject.next([...this.cartItems]);
+    this.updateCart();
+  }
+
   getTotalItems(): number {
     return this.cartItems.reduce((total, item) => total + (item.subtotal * item.cantidad), 0);
   }

@@ -23,10 +23,11 @@ export class DetallereservaService {
     return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
 
   }
+  
 
-  save(datos: DetalleReserva):Observable<void>{
+  save<T>(data: T): Observable<void>{
     return this.http.post<void>
-    (`${this.myAppUrl}${this.myApiUrl}`,datos)
+    (`${this.myAppUrl}${this.myApiUrl}`,data)
   }
 
   get(id: number): Observable<DetalleReserva>{

@@ -43,13 +43,13 @@
                   <a > {{ item.plato }}</a>
                 </td>
                 <td>
-                  <span class="amount">{{ item.precio_unitario}}</span>
+                  <span class="amount">${{ item.precio_unitario}}</span>
                 </td>
                 <td>
                   <div class="quantity">{{ item.cantidad}}</div>
                 </td>
                 <td>
-                  <span class="amount">{{ item.precio_unitario * item.cantidad}}</span>
+                  <span class="amount">${{ item.precio_unitario * item.cantidad}}</span>
                 </td>
               </tr>
           
@@ -59,14 +59,19 @@
                   </div>
                   <div class="col-md-6">
                     <div class="cart-btn">
-                      <button class="btn btn-default" type="submit">
-                        Actualizar Carrito
-                      </button>
-                      <button
+                     
+                      <button *ngIf="isAuthenticated()"
                         class="btn btn-success"
                         type="submit"
+                        (click)="createReserva()"
                       >
                         RESERVAR
+                      </button>
+                      <button *ngIf="!isAuthenticated()"
+                        class="btn btn-success"
+                        routerLink="/login"
+                      >
+                        Login
                       </button>
                     </div>
                   </div>
@@ -82,7 +87,7 @@
                 <tbody>
                   <tr>
                     <th>Carrito Total</th>
-                    <td><span class="amount">$ {{ cartService.getTotalItems() }}</span></td>
+                    <td><span class="amount">$ {{ cartService.getTotalItems() | number:'1.2-2' }}</span></td>
                   </tr>
                 </tbody>
               </table>
