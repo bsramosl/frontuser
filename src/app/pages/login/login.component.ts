@@ -14,6 +14,7 @@ export class LoginComponent {
 
   
   form: FormGroup;
+  formregister : FormGroup;
 
   constructor(private fb: FormBuilder,private appComponent: AppComponent,
     private router: Router,private authService: AuthService,
@@ -22,9 +23,14 @@ export class LoginComponent {
       username:[null],
       password:[null], 
     });
+
+    this.formregister = this.fb.group({
+      usuario:[null],
+      contrasena:[null], 
+      correo:[null], 
+      id_tipo_usuario:1,
+    });
   }
-
-
 
   login() {
     console.log(this.form.value)
@@ -48,4 +54,23 @@ export class LoginComponent {
     });
   }
 
+  registerUser() {
+    console.log(this.formregister.value)
+    if (this.formregister.valid) {
+      const user = this.formregister.value; 
+      console.log(user)
+      // Llama al servicio para registrar al usuario
+      this.userService.save(user).subscribe(
+        (response) => {
+          console.log('Registro exitoso:', response);
+          this.router.navigate(['']);  
+          // Puedes redirigir al usuario a la página de inicio de sesión u otra página aquí
+        },
+        (error) => {
+          console.error('Error durante el registro:', error);
+          // Manejar el error, por ejemplo, mostrar un mensaje de error al usuario
+        }
+      );
+    }
+  }
 }

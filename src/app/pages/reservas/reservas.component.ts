@@ -49,8 +49,6 @@ export class ReservasComponent {
      this.list = data
      this.actualizarTiempoRestante(); 
       this.loading = false;
-      console.log('Fecha actual:', new Date());
-console.log('Fecha de reserva:',data, new Date(data));
     })
 
   }
@@ -61,8 +59,7 @@ console.log('Fecha de reserva:',data, new Date(data));
     this.list.forEach(reserva => {
         const fechaReserva = new Date(reserva.fecha_reserva);
         const diferenciaEnMilisegundos = ahora.getTime() - fechaReserva.getTime();
-        const tiempoRestante = Math.max(30 - Math.floor(diferenciaEnMilisegundos / (1000 * 60)), 0);
-    
+        const tiempoRestante = Math.max(30 - Math.floor(diferenciaEnMilisegundos / (1000 * 60)), 0);    
         // Actualizar el tiempo restante para la reserva actual
         reserva.tiempoRestante = tiempoRestante;
        // Actualizar el tiempo restante para la reserva actual
@@ -87,7 +84,15 @@ console.log('Fecha de reserva:',data, new Date(data));
   }
 
   private proceso30min(reserva: Reserva) {
+    console.log(reserva)
+    if (reserva.estado == 'Pendiente'){ 
+      reserva.estado = 'Cancelado'
+      const idReserva = reserva.id_reserva ?? -1;
+      this.ReservaService.updateestado(idReserva, reserva).subscribe(() => {
+        this.getList();
+      });
+    }
     // Lógica para realizar el proceso después de 30 minutos
-    console.log(`Se ha alcanzado el tiempo límite para la reserva ${reserva.id_reserva}`);
+   
   }
 }

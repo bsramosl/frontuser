@@ -1183,14 +1183,15 @@ fieldset[disabled] .btn-default.active {
   height: 150px;
 }
 .page_header {
-  background: url(../img/header/1.jpg) no-repeat center top;
+  background: url(../icon/unemiComunidad.jpg) no-repeat center top;
+  background-position-y:40%;
   background-size: cover;
   padding: 200px 0 150px;
 }
 .page_header h2 {
   margin: 0;
   font-size: 70px;
-  line-height: 70px;
+  line-height: 0px;
   font-weight: 900;
   color: #fff;
 }

@@ -40,4 +40,8 @@ export class ReservaService { private myAppUrl: string;
   update(id: number, product: Reserva): Observable<void>{
     return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, product)
   }
+
+  updateestado(id: number, product: Reserva): Observable<void>{
+    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/estado/${id}`, product)
+  }
 }

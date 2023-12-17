@@ -31,6 +31,12 @@ export class UserService {
 
   } 
 
+  
+  save(user:any):Observable<void>{
+    return this.http.post<void>
+    (`${this.myAppUrl}${this.myApiUrl}`,user)
+  }
+
   get(id: number): Observable<Usuario>{
     return this.http.get<Usuario>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
   }
