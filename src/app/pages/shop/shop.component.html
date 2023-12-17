@@ -53,14 +53,14 @@
                 </td>
               </tr>
           
-              <tr>
+              <tr *ngIf="(cartItems$ | async)?.length != 0">
                 <td colspan="6" class="actions">
                   <div class="col-md-6"> 
                   </div>
                   <div class="col-md-6">
                     <div class="cart-btn">
                      
-                      <button *ngIf="isAuthenticated()"
+                      <button *ngIf="isAuthenticated()" 
                         class="btn btn-success"
                         type="submit"
                         (click)="createReserva()"

@@ -33,6 +33,10 @@ export class ReservaService { private myAppUrl: string;
     return this.http.get<Reserva>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
   }
 
+  getidUser(id: number): Observable<Reserva>{
+    return this.http.get<Reserva>(`${this.myAppUrl}${this.myApiUrl}/user/${id}`)
+  }
+
   update(id: number, product: Reserva): Observable<void>{
     return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, product)
   }

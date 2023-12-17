@@ -55,7 +55,7 @@ export class ShopComponent {
       // Crea un objeto de reserva con la información necesaria
       const nuevaReserva = {
         id_usuario : this.user.userId,
-        fecha_reserva: new Date(), // Asigna la fecha actual o la que desees
+        fecha_reserva: new Date(new Date().toUTCString()),
         estado: 'Pendiente',
         codigo_estado:this.generarCodigoUnico(),
         // Otros campos de la reserva...
@@ -66,7 +66,8 @@ export class ShopComponent {
           subtotal: item.cantidad*item.precio_unitario,    
         }))
       }; 
-     
+     console.log( new Date(new Date().toUTCString()),
+     )
       this.detalleReserva.save(nuevaReserva).subscribe(
         () => {
           this.cartService.clearCart();

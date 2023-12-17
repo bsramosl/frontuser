@@ -45,8 +45,9 @@
         {{ user.usuario }}<span class="caret"></span
       ></a>
       <ul *ngIf="isAuthenticated()" class="dropdown-menu" style="display: none">
+        <li><a routerLink="reserva">Reservas</a></li>
+        <li><a routerLink="perfil">Perfil</a></li>
         <li><a (click)="logout()">Salir</a></li>
-        <li><a>Perfil</a></li>
       </ul>
     </li>
     <li class="dropdown">

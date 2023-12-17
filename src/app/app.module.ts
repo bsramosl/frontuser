@@ -12,6 +12,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { BarComponent } from './pages/bar/bar.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { ShopComponent } from './pages/shop/shop.component';
+import { MapComponent } from './pages/map/map.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { ReservasComponent } from './pages/reservas/reservas.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ShopComponent } from './pages/shop/shop.component';
     HomeComponent,
     BarComponent,
     MenuComponent,
-    ShopComponent
+    ShopComponent,
+    MapComponent,
+    PerfilComponent,
+    ReservasComponent
   ],
   imports: [
     BrowserModule,

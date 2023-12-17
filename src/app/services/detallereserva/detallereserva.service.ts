@@ -34,6 +34,10 @@ export class DetallereservaService {
     return this.http.get<DetalleReserva>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
   }
 
+  getdet(id: number): Observable<DetalleReserva>{
+    return this.http.get<DetalleReserva>(`${this.myAppUrl}${this.myApiUrl}/det/${id}`)
+  }
+
   update(id: number, datos: DetalleReserva): Observable<void>{
     return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, datos)
   }
