@@ -7,4 +7,6 @@
     almuerzo_horario?: string;
     merienda_horario?: string;
     imagen?: string;
+    longitud?: number;
+    latitud?: number;
   }

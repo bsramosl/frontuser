@@ -11,6 +11,8 @@ import { Style, Icon } from 'ol/style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Geometry } from 'ol/geom';
+import { BarService } from '@app/services/bar/bar.service';
+import { Bar } from '@app/models/bar';
 
 @Component({
   selector: 'app-map',
@@ -21,14 +23,33 @@ export class MapComponent {
   map!: Map;
   vectorSource!: VectorSource<Feature<Geometry>>;
   vectorLayer!: VectorLayer<VectorSource<Feature<Geometry>>>;
-  ngOnInit() {}
+  list: Bar[] = [];
 
-  ngAfterViewInit() {
-    this.initializeMap();
-  }
+ 
+  constructor(private bar:BarService){}
+ 
+  ngOnInit() {    
+    this.bar.getList().subscribe((data:any)=>{     
+      this.list = data    
+      this.initializeMap();
+     });   
+    
+  } 
 
-  initializeMap() {
-    this.vectorSource = new VectorSource<Feature<Geometry>>();
+  initializeMap() {   
+    this.vectorSource = new VectorSource<Feature<Geometry>>();    
+    
+    this.list.forEach(bar => {
+          const marker = new Feature({
+          geometry: new Point(fromLonLat([bar.longitud ?? 0, bar.latitud ?? 0], 'EPSG:4326')),
+          id_bar: bar.id_bar,
+          nombre_bar: bar.nombre_bar,
+          imagen: bar.imagen,
+        });
+          
+        this.vectorSource.addFeature(marker); 
+      });
+    
     this.vectorLayer = new VectorLayer({
       source: this.vectorSource,
       style: new Style({
@@ -38,6 +59,7 @@ export class MapComponent {
         }),
       }),
     });
+    
 
     this.map = new Map({
       target: 'map', // ID del elemento HTML que contendrá el mapa
@@ -52,31 +74,7 @@ export class MapComponent {
         zoom: 17,
       }),
     });
-
-     // Agregar un evento de clic al mapa
-     this.map.on('click', (event: MapBrowserEvent<UIEvent>) => {
-      this.handleMapClick(event);
-    });
-  }
-
-  handleMapClick(event: MapBrowserEvent<UIEvent>) {
-    // Obtener las coordenadas del clic
-    const coordinates = event.coordinate;
-
-    // Convertir las coordenadas a una cadena legible
-    const coordinatesString = toStringXY(coordinates, 2);
-
-    // Imprimir las coordenadas en la consola (puedes hacer algo más útil aquí)
-    console.log('Ubicación seleccionada:', coordinatesString); 
-    // Limpiar marcadores anteriores
-    this.vectorSource.clear(); 
-    // Crear un nuevo marcador en la ubicación seleccionada
-    const marker = new Feature({
-      geometry: new Point(coordinates),
-    });
-    // Agregar el marcador a la capa de vectores
-    this.vectorSource.addFeature(marker);
-
-    // Puedes realizar otras acciones aquí, como enviar las coordenadas al formulario, etc.
-  }
+ 
+  } 
 }
+

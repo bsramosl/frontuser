@@ -31,22 +31,22 @@
           </div>
         </div>
         <div class="row menu-items2">
-            <div *ngFor="let lista of filterMenuItems()" class="menu-item2 col-sm-4 col-xs-12 starter dinner desserts">
-            <div class="menu-info">
-              <img src="{{lista.foto}}" class="img-responsive" alt />
-              <a   >
-                <div class="menu2-overlay">
-                  <h4>{{lista.plato}}</h4>
-                  <p>
-                    {{lista.descripcion}}
-                  </p>
-                  <span class="price">$ {{lista.precio}}</span>
-                  <h4>{{lista.estado}}</h4>
-                </div>
-              </a>
+          <div *ngFor="let lista of filterMenuItems()" class="col-sm-4 col-xs-12 starter dinner desserts">
+            <div *ngIf="lista.estado != 'Agotado'" class="menu-item2">
+              <div class="menu-info">
+                <img src="{{lista.foto}}" class="img-responsive" alt />
+                <a>
+                  <div class="menu2-overlay">
+                    <h4>{{lista.plato}}</h4>
+                    <p>{{lista.descripcion}}</p>
+                    <span class="price">$ {{lista.precio}}</span>
+                    <h4>{{lista.estado}}</h4>
+                  </div>
+                </a>
+              </div>
+              <button (click)="addToCart(lista)" class="menu-more">+</button>
             </div>
-            <button  (click)="addToCart(lista)" class="menu-more">+</button>
-          </div>        
+          </div>
         </div>
       </div>
     </div>
