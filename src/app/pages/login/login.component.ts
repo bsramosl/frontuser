@@ -33,8 +33,6 @@ export class LoginComponent {
   }
 
   login() {
-    console.log(this.form.value)
-
     this.authService.login(this.form.value.username, this.form.value.password).subscribe((response) => {
       if (response.success) {
         this.router.navigate(['']);     
@@ -43,8 +41,10 @@ export class LoginComponent {
         this.authService.setToken(token);
         // Recupera información del usuario (puedes ajustar según tu API)
         const user = {
-          userId: response.user.userId,
-          usuario: response.user.username,
+          userId: response.user.id_usuario,
+          usuario: response.user.usuario,
+          tipo_usuario:response.user.nombre_tipo_usuario,
+          id_tipo_usuario:response.user.id_tipo_usuario
         }; 
         // Almacena el usuario en el servicio
         this.userService.setCurrentUser(user); 
