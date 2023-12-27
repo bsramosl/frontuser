@@ -44,7 +44,8 @@ export class LoginComponent {
           userId: response.user.id_usuario,
           usuario: response.user.usuario,
           tipo_usuario:response.user.nombre_tipo_usuario,
-          id_tipo_usuario:response.user.id_tipo_usuario
+          id_tipo_usuario:response.user.id_tipo_usuario,
+          id_bar:response.user.id_bar
         }; 
         // Almacena el usuario en el servicio
         this.userService.setCurrentUser(user); 
