@@ -31,9 +31,9 @@ export class MenuComponent {
 
   filterMenuItems() {
     if (this.currentState === 'All') {
-      return this.list; // Display all items
+      return this.list.filter(item => item.estado !== 'Agotado'); // Filter out 'Agotado' items
     } else {
-      return this.list.filter(item => item.nombre_menu === this.currentState);
+      return this.list.filter(item => item.nombre_menu === this.currentState && item.estado !== 'Agotado');
     }
   } 
 
