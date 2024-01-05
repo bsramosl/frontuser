@@ -194,7 +194,7 @@ html {
   padding: 10px 15px;
 }
 .btn-default {
-  background-color: #f9c56a;
+  background-color: #63e66a;
 }
 .btn-default:hover {
   background-color: #f7b239;
@@ -263,7 +263,7 @@ fieldset[disabled] .btn-default.active {
 .navbar .navbar-nav > li > a:hover,
 .navbar .navbar-nav > li > a:active {
   background-color: inherit !important;
-  color: #f9c56a;
+  color: #6af971;
 }
 .navbar .navbar-nav > li > a:focus {
   background-color: inherit !important;
