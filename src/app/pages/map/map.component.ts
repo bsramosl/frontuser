@@ -6,7 +6,7 @@ import { MapBrowserEvent } from 'ol';
 import { toStringXY } from 'ol/coordinate';
 import Feature, { FeatureLike } from 'ol/Feature';
 import Point from 'ol/geom/Point';
-import { fromLonLat } from 'ol/proj';
+import { fromLonLat, toLonLat } from 'ol/proj';
 import { Style, Icon } from 'ol/style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
@@ -33,7 +33,7 @@ export class MapComponent {
       this.list = data    
       this.initializeMap();
      });   
-    
+     this.getUserLocation();    
   } 
 
   initializeMap() {   
@@ -76,5 +76,23 @@ export class MapComponent {
     });
  
   } 
+
+  getUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const coordinates = toLonLat([position.coords.longitude, position.coords.latitude], 'EPSG:4326');
+        console.log(coordinates)
+        // Ahora puedes agregar un marcador para la ubicación del usuario
+        const userMarker = new Feature({
+          geometry: new Point(fromLonLat(coordinates, 'EPSG:4326')),
+          nombre_bar: 'Tu Ubicación',
+          imagen: 'assets/icon/location.png', // Reemplaza con la ruta a tu icono de ubicación
+        });
+
+        this.vectorSource.addFeature(userMarker);
+      });
+    }
+  }
+
 }
 
