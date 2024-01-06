@@ -7,7 +7,6 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
-import { RegistroComponent } from './pages/registro/registro.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BarComponent } from './pages/bar/bar.component';
 import { MenuComponent } from './pages/menu/menu.component';
@@ -21,7 +20,6 @@ import { ReservasComponent } from './pages/reservas/reservas.component';
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    RegistroComponent,
     HomeComponent,
     BarComponent,
     MenuComponent,
