@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from '@app/app.component';
+import { MensajeService } from '@app/services/mensaje/mensaje.service';
 import { UserService } from '@app/services/user/user.service';
 import {AuthService } from 'app/services/auth/auth.service';
 
@@ -20,7 +21,7 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder,private appComponent: AppComponent,
     private router: Router,private authService: AuthService,
-    private userService: UserService) {
+    private userService: UserService,private mensajeService: MensajeService) {
     this.form = this.fb.group({
       username:[null],
       password:[null], 
@@ -56,8 +57,12 @@ export class LoginComponent {
         // Almacena el usuario en el servicio
         this.userService.setCurrentUser(user); 
       } else {
-        console.log('Login failed', response.message);
+        this.mensajeService.showAlert('Error', 'Usuario o Contraseña Incorrectos','error');
       }
+    },
+    (error) => {
+      // Manejar el error aquí
+      this.mensajeService.showAlert('Error', 'Hubo un error en la solicitud de inicio de sesión', 'error');
     });
   }
 
@@ -69,13 +74,13 @@ export class LoginComponent {
       // Llama al servicio para registrar al usuario
       this.userService.save(user).subscribe(
         (response) => {
+          this.mensajeService.showAlert('Exito', 'Registro exitoso', 'success');           
           console.log('Registro exitoso:', response);
           this.router.navigate(['']);  
           // Puedes redirigir al usuario a la página de inicio de sesión u otra página aquí
         },
         (error) => {
-          console.error('Error durante el registro:', error);
-          // Manejar el error, por ejemplo, mostrar un mensaje de error al usuario
+          this.mensajeService.showAlert('Error', 'Error durante el registro', 'error'); 
         }
       );
     }
