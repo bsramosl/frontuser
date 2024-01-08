@@ -22,12 +22,12 @@ export class AuthService {
     private router: Router
   ) {
     this.myAppUrl = environment.endpoint;
-    this.myApiUrl = 'api/auth/login';
+    this.myApiUrl = 'api/auth';
     this.jwtHelper = new JwtHelperService();
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.myAppUrl}${this.myApiUrl}`, { username, password });
+    return this.http.post(`${this.myAppUrl}${this.myApiUrl}/login`, { username, password });
   }
 
   setToken(token: string): void {
@@ -64,4 +64,16 @@ export class AuthService {
     // Devuelve false si el token no existe o ha expirado
     return token ? !this.jwtHelper.isTokenExpired(token) : false;
   }
+
+  requestPasswordReset(email: string): Observable<any> {
+    //envia correo con token para reseteo
+    const url = `${this.myAppUrl}${this.myApiUrl}/password-reset`;
+    return this.http.post(url, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    const url = `${this.myAppUrl}${this.myApiUrl}/reset-password`;
+    const body = { token, newPassword };
+    return this.http.post(url, body);
+  }    
 }

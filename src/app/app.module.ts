@@ -14,6 +14,8 @@ import { ShopComponent } from './pages/shop/shop.component';
 import { MapComponent } from './pages/map/map.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
+import { RecuperarComponent } from './pages/recuperar/recuperar.component';
+import { ResetComponent } from './pages/reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ReservasComponent } from './pages/reservas/reservas.component';
     ShopComponent,
     MapComponent,
     PerfilComponent,
-    ReservasComponent
+    ReservasComponent,
+    RecuperarComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

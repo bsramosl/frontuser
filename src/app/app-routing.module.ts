@@ -8,12 +8,17 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { ReservasComponent } from './pages/reservas/reservas.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { RecuperarComponent } from './pages/recuperar/recuperar.component';
+import { ResetComponent } from './pages/reset/reset.component';
 
 
 
 const routes: Routes = [
   
   {path: '',component:HomeComponent}, 
+
+  {path: 'recuperar',component:RecuperarComponent},
+  {path: 'reset-password',component:ResetComponent},
 
   {path: 'login', component:LoginComponent}, 
   {path: 'reserva', component:ReservasComponent}, 
