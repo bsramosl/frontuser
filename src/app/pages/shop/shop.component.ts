@@ -15,7 +15,7 @@ import { UserService } from '@app/services/user/user.service';
 })
 export class ShopComponent {
   user: any;
-
+  comentario: string = '';
   cartItems$: Observable<CartItem[]>;
   
   constructor( public cartService: CartService, private authService: AuthService,
@@ -50,6 +50,8 @@ export class ShopComponent {
 
  
   createReserva() { 
+
+    console.log('Valor del input:', this.comentario);
     // Obtén la información necesaria para la reserva desde tu carrito
     this.cartItems$.pipe(take(1)).subscribe((cartItems) => {
       // Crea un objeto de reserva con la información necesaria
@@ -58,6 +60,7 @@ export class ShopComponent {
         fecha_reserva: new Date(), // Asigna la fecha actual o la que desees
         estado: 'Pendiente',
         codigo_estado:this.generarCodigoUnico(),
+        comentario:this.comentario,
         // Otros campos de la reserva...
         detalles: cartItems.map(item => ({
           id_menu: item.id_menu,
