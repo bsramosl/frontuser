@@ -1,4 +1,4 @@
 export const environment = {
-    production: false,
-    endpoint: 'http://localhost:3000/'
+    production: true,
+    endpoint: 'https://server-production-9767.up.railway.app/'
 };
