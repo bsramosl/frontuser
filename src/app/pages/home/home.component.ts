@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { BarService } from 'app/services/bar/bar.service';
 import { Bar } from '../../models/bar';
+import { environment } from 'environments/environment';
+
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,6 +14,7 @@ export class HomeComponent {
       
   list: Bar[] = [];
   loading: boolean = false;
+  env = environment.endpoint; 
 
   constructor(private barService: BarService) { }
 

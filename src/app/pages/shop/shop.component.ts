@@ -6,6 +6,7 @@ import { AuthService } from '@app/services/auth/auth.service';
 import { DetallereservaService } from '@app/services/detallereserva/detallereserva.service';
 import { Router } from '@angular/router';
 import { UserService } from '@app/services/user/user.service';
+import { environment } from 'environments/environment';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ShopComponent {
   user: any;
   comentario: string = '';
   cartItems$: Observable<CartItem[]>;
+  env = environment.endpoint; 
   
   constructor( public cartService: CartService, private authService: AuthService,
     private detalleReserva: DetallereservaService,private router: Router,

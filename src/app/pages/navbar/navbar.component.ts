@@ -4,6 +4,7 @@ import { CartItem } from '@app/models/cart';
 import { AuthService } from '@app/services/auth/auth.service';
 import { CartService } from '@app/services/cart/cart.service';
 import { UserService } from '@app/services/user/user.service';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,6 +15,7 @@ import { Observable } from 'rxjs';
 export class NavbarComponent {
   user: any;
   cartItems$: Observable<CartItem[]>;
+  env = environment.endpoint; 
 
 
   constructor(private userService: UserService, public cartService: CartService,

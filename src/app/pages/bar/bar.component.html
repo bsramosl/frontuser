@@ -34,7 +34,7 @@
         <div *ngFor="let lista of filterMenuItems()" class="col-sm-4 col-xs-12 starter dinner desserts">
           <div *ngIf="lista.estado != 'Agotado'" class="menu-item2">
             <div class="menu-info">
-              <img src="{{lista.foto}}" class="img-responsive" style="height:251px; width:360px;" alt />
+              <img src="{{env + lista.foto}}" class="img-responsive" style="height:251px; width:360px;" alt />
               <a>
                 <div class="menu2-overlay">
                   <h4>{{lista.plato}}</h4>

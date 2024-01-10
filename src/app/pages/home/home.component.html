@@ -23,7 +23,7 @@
         <div class="col-md-3 col-sm-6 text-center"  *ngFor="let lista of list">
           <div class="team-staff wow fadeInUp" data-wow-delay="0.2s">
             <a routerLink="/bar/{{lista.id_bar}}"><img
-              src="{{lista.imagen}}"
+              src="{{env + lista.imagen}}"
               class="img-responsive center-block"
               alt style="width:262px; height: 177px;"
             />

@@ -5,6 +5,8 @@ import { MenuService } from '@app/services/menu/menu.service';
 import { Menu } from '../../models/menu';
 import { CartService } from '@app/services/cart/cart.service';
 import { CartItem } from '@app/models/cart';
+import { environment } from 'environments/environment';
+
 
 
 @Component({
@@ -17,7 +19,7 @@ export class BarComponent {
   loading: boolean = false;
   list : Menu[] = [];
   currentState = 'All'; 
-  
+  env = environment.endpoint; 
   
 
   constructor(private barService : BarService,
@@ -25,7 +27,7 @@ export class BarComponent {
     private router: Router,
     private aRouter: ActivatedRoute,
     private cartService: CartService){ 
-    this.id = Number(aRouter.snapshot.paramMap.get('id'));
+    this.id = Number(aRouter.snapshot.paramMap.get('id')); 
   } 
    
   ngOnInit(): void {

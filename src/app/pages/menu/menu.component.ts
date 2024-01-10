@@ -3,6 +3,7 @@ import { MenuService } from 'app/services/menu/menu.service';
 import { Menu } from '../../models/menu';
 import { CartItem } from '@app/models/cart';
 import { CartService } from 'app/services/cart/cart.service'
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-menu',
@@ -14,6 +15,7 @@ export class MenuComponent {
   list: Menu[] = [];
   loading: boolean = false;
   currentState = 'All'; 
+  env = environment.endpoint; 
 
   constructor(private menuService: MenuService,private cartService: CartService) { }
    
