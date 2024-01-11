@@ -16,6 +16,12 @@ export class NavbarComponent {
   user: any;
   cartItems$: Observable<CartItem[]>;
   env = environment.endpoint; 
+  isDropdownOpen = false;
+
+
+  toggleDropdown() {
+  this.isDropdownOpen = !this.isDropdownOpen;
+}
 
 
   constructor(private userService: UserService, public cartService: CartService,
