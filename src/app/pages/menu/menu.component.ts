@@ -26,17 +26,13 @@ export class MenuComponent {
   getList(){
     this.loading = true;
     this.menuService.getList().subscribe((data: Menu[])=>{
-      this.list = data;
+      this.list = data.filter(item => item.estado !== 'Agotado');
       this.loading = false;
     })
   }  
 
   filterMenuItems() {
-    if (this.currentState === 'All') {
-      return this.list.filter(item => item.estado !== 'Agotado'); // Filter out 'Agotado' items
-    } else {
-      return this.list.filter(item => item.nombre_menu === this.currentState && item.estado !== 'Agotado');
-    }
+    return this.list.filter(item => item.estado !== 'Agotado');
   } 
 
   addToCart(menu: Menu) {

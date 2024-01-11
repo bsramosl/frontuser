@@ -38,8 +38,9 @@ export class BarComponent {
     this.loading = true;
     this.menuService.getListBar(this.id).subscribe(
       (data: Menu | Menu[]) => { // Allow for a single item or an array
-        this.list = Array.isArray(data) ? data : [data];
-        this.loading = false;     
+        // Filtrar los elementos con estado diferente de 'Agotado'
+        this.list = Array.isArray(data) ? data.filter(item => item.estado !== 'Agotado') : [data];
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching data:', error);
