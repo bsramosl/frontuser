@@ -65,8 +65,7 @@ export class AuthService {
     return token ? !this.jwtHelper.isTokenExpired(token) : false;
   }
 
-  requestPasswordReset(email: string): Observable<any> {
-    const origin = window.location.origin;
+  requestPasswordReset(email: string,origin:string): Observable<any> {
     //envia correo con token para reseteo
     const url = `${this.myAppUrl}${this.myApiUrl}/password-reset`;
     return this.http.post(url, { email , origin });

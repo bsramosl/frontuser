@@ -11,16 +11,18 @@ import { MensajeService } from '@app/services/mensaje/mensaje.service';
 })
 export class RecuperarComponent {
   form: FormGroup;
+  origin:string='';
 
   constructor(private mensajeService: MensajeService,private fb: FormBuilder, private authService: AuthService,private appComponent: AppComponent) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
     });
+    this.origin = window.location.origin;
   }
 
   submit() {
     const email = this.form.value.email;
-    this.authService.requestPasswordReset(email).subscribe(
+    this.authService.requestPasswordReset(email,this.origin).subscribe(
       (response) => {
         this.mensajeService.showAlert('Exito', response.message, 'success');
       },
