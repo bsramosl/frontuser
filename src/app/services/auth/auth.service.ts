@@ -66,9 +66,10 @@ export class AuthService {
   }
 
   requestPasswordReset(email: string): Observable<any> {
+    const origin = window.location.origin;
     //envia correo con token para reseteo
     const url = `${this.myAppUrl}${this.myApiUrl}/password-reset`;
-    return this.http.post(url, { email });
+    return this.http.post(url, { email , origin });
   }
 
   resetPassword(token: string, newPassword: string): Observable<any> {
