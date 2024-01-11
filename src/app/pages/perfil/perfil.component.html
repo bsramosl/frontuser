@@ -14,31 +14,31 @@
           <div class="col-md-12">
             <div class="billing-details">
               <h3 class="text-left">Perfil</h3>
-              <br />
+              <br /> 
               <form [formGroup]="form" (ngSubmit)="add()">
                 <label class>Country </label>
-                <select class="form-control">
-                  <option value>Select Country</option>
-                  <option value="AX">Aland Islands</option>
-                  <option value="AF">Afghanistan</option>
-                  <option value="AL">Albania</option>
-                  <option value="DZ">Algeria</option>
-                  <option value="AD">Andorra</option>
-                  <option value="AO">Angola</option>
-                  <option value="AI">Anguilla</option>
-                  <option value="AQ">Antarctica</option>
-                  <option value="AG">Antigua and Barbuda</option>
-                  <option value="AR">Argentina</option>
-                  <option value="AM">Armenia</option>
-                  <option value="AW">Aruba</option>
-                  <option value="AU">Australia</option>
-                  <option value="AT">Austria</option>
-                  <option value="AZ">Azerbaijan</option>
-                  <option value="BS">Bahamas</option>
-                  <option value="BH">Bahrain</option>
-                  <option value="BD">Bangladesh</option>
-                  <option value="BB">Barbados</option>
+                <select id="id_pais" class="form-control" formControlName="id_pais">
+                  <option value="" disabled selected>--Selecciona un Pais</option>
+                  <option *ngFor="let pais of paises" [value]="pais.id_pais">{{ pais.nombre_pais }}</option>
                 </select>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Provincia</label>
+                    <select id="id_provincia" class="form-control" formControlName="id_provincia">
+                      <option value="" disabled selected>--Selecciona una Provincia</option>
+                      <option *ngFor="let provincia of provincias" [value]="provincia.id_provincia">{{ provincia.nombre_provincia}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Ciudad </label>
+                    <select id="id_ciudad" class="form-control" formControlName="id_ciudad">
+                      <option value="" disabled selected>--Selecciona una Ciudad</option>
+                      <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad">{{ ciudad.nombre_ciudad}}</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="clearfix space20"></div>
                 <div class="row">
                   <div class="col-md-6">
