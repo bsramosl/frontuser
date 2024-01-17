@@ -88,14 +88,21 @@ export class MapComponent {
     this.map.addOverlay(this.popup);
 
     // Registrar el evento 'singleclick' en el mapa
-    this.map.on('singleclick', (event: any) => {
-      this.handleMapClick(event);
-    });
-
-    // Cerrar el popup al hacer clic en el botón de cerrar
-    document.getElementById('popup-closer')!.onclick = () => {
-      this.popup.setPosition(undefined);
-    };
+    this.map.on('singleclick', (event: MapBrowserEvent<UIEvent>) => {
+      const feature = this.map.forEachFeatureAtPixel(
+        event.pixel,
+        (feature: FeatureLike) => feature
+      );
+  
+      if (!feature) {
+        // Si no se hizo clic en una característica, cierra el popup
+        this.popup.setPosition(undefined);
+      } else {
+        const coordinates = event.coordinate;
+        const content = `<h3>${feature.get('nombre_bar')}</h3>`;
+        this.showPopup(coordinates, content);
+      }
+    }); 
   }
 
   handleMapClick(event: any) {
@@ -121,8 +128,16 @@ export class MapComponent {
         const userMarker = new Feature({
           geometry: new Point(fromLonLat(coordinates)),
           nombre_bar: 'Tu Ubicación',
-          imagen: 'assets/icon/location.png', // Reemplaza con la ruta a tu icono de ubicación
         });
+
+        userMarker.setStyle(
+          new Style({
+            image: new Icon({
+              anchor: [0.5, 1],
+              src: 'assets/icon/location.png',
+            }),
+          })
+        );
 
         this.vectorSource.addFeature(userMarker);
       });

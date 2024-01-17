@@ -11,11 +11,9 @@
   /* Estilos para el enlace de cierre del popup */
   .ol-popup-closer {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 12px;
-    color: #333;
-    text-decoration: none;
+    top: 2px;
+    right: 8px;
+    cursor: pointer;
   }
   
   /* Estilos para el contenido del popup */
