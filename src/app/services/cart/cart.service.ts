@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '@app/models/cart';
 import { BehaviorSubject } from 'rxjs';
+import { MensajeService } from '../mensaje/mensaje.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class CartService { 
+export class CartService {
   private cartItems: CartItem[] = [];
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
 
-  constructor() {
+  constructor(private mensajeService: MensajeService) {
     // Recuperar el carrito del localStorage al inicializar el servicio
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
@@ -28,9 +29,21 @@ export class CartService {
     if (existingItem) {
       existingItem.cantidad += item.cantidad;
     } else {
-      this.cartItems.push(item);
+      debugger
+      if (this.cartItems.length === 0) {
+        this.cartItems.push(item);
+      } else {
+        const existingItemWithSameBar = this.cartItems.find(
+          (i) => i.id_bar === item.id_bar
+        );
+        if (existingItemWithSameBar) {
+          this.cartItems.push(item);
+         } else {
+          this.mensajeService.showAlert('Error', 'No puede seleccionar el menu de otro Bar hasta terminar con la reserva.','error');
+          return;
+        }
+      }
     }
-
     this.cartSubject.next([...this.cartItems]);
     this.updateCart();
   }
@@ -48,7 +61,10 @@ export class CartService {
   }
 
   getTotalItems(): number {
-    return this.cartItems.reduce((total, item) => total + (item.subtotal * item.cantidad), 0);
+    return this.cartItems.reduce(
+      (total, item) => total + item.subtotal * item.cantidad,
+      0
+    );
   }
 
   private updateCart() {

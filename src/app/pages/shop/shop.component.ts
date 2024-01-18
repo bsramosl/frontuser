@@ -66,6 +66,7 @@ export class ShopComponent {
         // Otros campos de la reserva...
         detalles: cartItems.map(item => ({
           id_menu: item.id_menu,
+          id_bar:item.id_bar,
           cantidad: item.cantidad,
           precio_unitario: item.precio_unitario,
           subtotal: item.cantidad*item.precio_unitario,    
